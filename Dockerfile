@@ -3,10 +3,10 @@ FROM centos:7.8.2003
 
 # 70 is the standard uid/gid for "postgres" in Alpine
 # https://git.alpinelinux.org/aports/tree/main/postgresql/postgresql.pre-install?h=3.12-stable
-RUN groupadd -r -g 70 postgres && useradd -r -g postgres -u 70 postgres
+# RUN groupadd -r -g 70 postgres && useradd -r -g postgres -u 70 postgres
 RUN set -eux; \
 	groupadd -r -g 70 postgres; \
-	adduser -u 70 -S -D -G postgres -M -d /var/lib/postgresql -s /bin/sh postgres; \
+	useradd -u 70 -r -g postgres -M -d /var/lib/postgresql -s /bin/sh postgres; \
 	mkdir -p /var/lib/postgresql; \
 	chown -R postgres:postgres /var/lib/postgresql
 
